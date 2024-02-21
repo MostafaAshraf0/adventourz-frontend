@@ -31,6 +31,7 @@ const Header = () => {
           sequence={["EGYPT"]}
           wrapper="h1"
           className="linear-gradient-text text-4xl font-black lg:text-8xl"
+          cursor={false}
         />
         <TypeAnimation
           sequence={[
@@ -48,6 +49,7 @@ const Header = () => {
           ]}
           wrapper="h2"
           repeat={Infinity}
+          cursor={false}
           className="m-0 text-2xl font-bold text-white lg:text-4xl"
         />
 
