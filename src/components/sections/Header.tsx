@@ -9,7 +9,10 @@ import { FaArrowRight } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <div className=" relative flex h-full  overflow-hidden rounded-b-[50px] bg-black/30 px-10 py-24 lg:p-10">
+    <div
+      id="home"
+      className=" relative flex h-full  overflow-hidden rounded-b-[50px] bg-black/30 px-10 py-24 lg:p-10"
+    >
       <div
         style={{
           backgroundImage: `url(${camelPyramids})`,
@@ -28,6 +31,7 @@ const Header = () => {
           sequence={["EGYPT"]}
           wrapper="h1"
           className="linear-gradient-text text-4xl font-black lg:text-8xl"
+          cursor={false}
         />
         <TypeAnimation
           sequence={[
@@ -45,6 +49,7 @@ const Header = () => {
           ]}
           wrapper="h2"
           repeat={Infinity}
+          cursor={false}
           className="m-0 text-2xl font-bold text-white lg:text-4xl"
         />
 

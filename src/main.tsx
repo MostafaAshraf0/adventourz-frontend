@@ -3,8 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Tours from "./components/sections/Tours.tsx";
-import Blogs from "./components/sections/Blogs.tsx";
+import ToursPage from "./pages/Tours/ToursPage.tsx";
+import BlogsPage from "./pages/Blogs/BlogsPage.tsx";
+import TourDetailPage from "./pages/Tours/TourDetailPage.tsx";
+import BlogDetailPage from "./pages/Blogs/BlogDetailPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,19 +15,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/tours",
-    element: <Tours />,
+    element: <ToursPage />,
   },
   {
     path: "/tours/:id",
-    element: <div>Tour Detail Page</div>,
+    element: <TourDetailPage />,
   },
   {
     path: "/blogs",
-    element: <Blogs />,
+    element: <BlogsPage />,
   },
   {
     path: "/blogs/:id",
-    element: <div>Blog Detail Page</div>,
+    element: <BlogDetailPage />,
   },
   {
     path: "/privacypolicy",

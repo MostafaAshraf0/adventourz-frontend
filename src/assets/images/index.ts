@@ -16,4 +16,15 @@ const cairoCity =
 const cairoCity2 =
   "https://res.cloudinary.com/dwyljloep/image/upload/v1708439258/Cairo-1024x683_svxcx2.jpg";
 
-export { camelPyramids, pyramids, mosque, manInBoat, cairoCity, cairoCity2 };
+const logo =
+  "https://res.cloudinary.com/dwyljloep/image/upload/c_scale,w_500/v1708480669/IMG_0532_2-removebg-preview_1_wl5faf.png";
+
+export {
+  camelPyramids,
+  pyramids,
+  mosque,
+  manInBoat,
+  cairoCity,
+  cairoCity2,
+  logo,
+};
