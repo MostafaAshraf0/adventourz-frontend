@@ -9,7 +9,10 @@ import { FaArrowRight } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <div className=" relative flex h-full  overflow-hidden rounded-b-[50px] bg-black/30 px-10 py-24 lg:p-10">
+    <div
+      id="home"
+      className=" relative flex h-full  overflow-hidden rounded-b-[50px] bg-black/30 px-10 py-24 lg:p-10"
+    >
       <div
         style={{
           backgroundImage: `url(${camelPyramids})`,

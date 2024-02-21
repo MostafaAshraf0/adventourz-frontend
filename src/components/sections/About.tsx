@@ -3,7 +3,7 @@ import Divider from "../Divider";
 
 const About = () => {
   return (
-    <div className="h-full px-10 py-10 lg:px-32 lg:py-20">
+    <div id="about" className="h-full px-10 py-10 lg:px-32 lg:py-20">
       <div className="flex flex-row items-center gap-4">
         <Divider width="w-20" bg="bg-secondary" />
         <h1 className="text-2xl font-black text-secondary lg:text-4xl">

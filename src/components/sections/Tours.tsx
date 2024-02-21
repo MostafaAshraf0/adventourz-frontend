@@ -2,17 +2,18 @@ import { manInBoat } from "@/assets/images";
 import Divider from "../Divider";
 import ToursCarousel from "../tours/ToursCarousel";
 import { Button } from "../ui/button";
-import {
-  FaArrowDown,
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { PiArrowUpRight } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Tours = () => {
+  const navigate = useNavigate();
   return (
-    <div className="h-full min-h-screen overflow-hidden rounded-[50px]">
+    <div
+      id="tours"
+      className="h-full min-h-screen overflow-hidden rounded-[50px]"
+    >
       <div className="flex h-full w-full bg-white">
         {/* left */}
         <div className="w-full space-y-12 px-10 py-14 font-bold  lg:w-3/5 lg:pl-32 ">
@@ -36,9 +37,12 @@ const Tours = () => {
               variant={"primary"}
               size={"lg"}
               className="gap-1 px-9 text-xl"
+              onClick={() => {
+                navigate("/tours");
+              }}
             >
               Explore
-              <FaArrowDown />
+              <PiArrowUpRight />
             </Button>
           </div>
 
