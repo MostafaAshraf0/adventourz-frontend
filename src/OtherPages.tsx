@@ -1,15 +1,16 @@
-import { Outlet } from "react-router-dom";
+import React from "react";
 import Navbar from "./components/sections/Navbar";
+import { Outlet } from "react-router-dom";
 import Footer from "./components/sections/Footer";
 
-const App = () => {
+const OtherPages = () => {
   return (
     <>
-      <Navbar isHomePage={true} />
+      <Navbar isHomePage={false} />
       <Outlet />
       <Footer />
     </>
   );
 };
 
-export default App;
+export default OtherPages;

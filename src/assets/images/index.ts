@@ -10,6 +10,9 @@ const mosque =
 const manInBoat =
   "https://res.cloudinary.com/dwyljloep/image/upload/v1708439267/pexels-photographywithlens-14730990_swdbqd.jpg";
 
+const manInBoat2 =
+  "https://res.cloudinary.com/dwyljloep/image/upload/v1709217977/Photography_j0u58s.jpg";
+
 const cairoCity =
   "https://res.cloudinary.com/dwyljloep/image/upload/v1708439262/cairo-city-skyline-6un754fqkwlg7edt_lsqkiw.jpg";
 
@@ -24,6 +27,7 @@ export {
   pyramids,
   mosque,
   manInBoat,
+  manInBoat2,
   cairoCity,
   cairoCity2,
   logo,

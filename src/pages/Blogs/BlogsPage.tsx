@@ -1,5 +1,7 @@
+import Blogs from "@/components/sections/Blogs";
+
 const BlogsPage = () => {
-  return <div>BlogsPage</div>;
+  return <Blogs />;
 };
 
 export default BlogsPage;

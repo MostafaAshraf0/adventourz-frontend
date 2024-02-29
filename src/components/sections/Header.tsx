@@ -6,6 +6,7 @@ import {
   mosque,
 } from "../../assets/images";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -59,7 +60,7 @@ const Header = () => {
           consequuntur! Molestiae voluptates quos repellendus iste placeat qui.
         </p>
         <button className="flex flex-row items-center justify-center gap-1 rounded-3xl bg-primary px-5 py-2 text-white duration-300 hover:bg-secondary lg:text-2xl">
-          Explore
+          <Link to={"/tours"}>Explore</Link>
           <FaArrowRight />
         </button>
       </div>
