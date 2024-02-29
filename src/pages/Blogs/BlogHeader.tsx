@@ -1,5 +1,4 @@
 import { manInBoat2 } from "@/assets/images";
-import React from "react";
 
 const BlogHeader = () => {
   return (

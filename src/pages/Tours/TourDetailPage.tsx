@@ -1,8 +1,8 @@
 import { pyramids } from "@/assets/images";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const TourDetailPage = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <img
