@@ -1,5 +1,3 @@
-import { cairoCity2 } from "@/assets/images";
-
 import { FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -9,8 +7,6 @@ const BlogCard = ({ id }: { id: string }) => {
       to={`/blogs/${id}`}
       className="h-full rounded-3xl bg-white p-4 hover:scale-105 hover:bg-white/80"
     >
-      <img src={cairoCity2} alt="" className="rounded-[34px]" />
-
       <h1 className="mt-4 text-2xl ">The Ultimate Guide to Cairo</h1>
 
       <p className="mt-2 line-clamp-4 text-sm text-gray-400 lg:mt-4 lg:text-base">

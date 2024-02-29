@@ -12,11 +12,7 @@ const About = () => {
       </div>
       <div className="mt-8 flex w-full flex-col items-center justify-center gap-5 lg:mt-[60px] lg:flex-row ">
         <div className="overflow-x-hidden rounded-3xl lg:w-[50%] lg:rounded-[50px]">
-          <img
-            src={cairoCity2}
-            alt=""
-            className="lg:max-h-[500px] lg:max-w-[600px]"
-          />
+          <img src={cairoCity2} alt="" className="object-cover  " />
         </div>
         <div className="m-auto text-center lg:w-[50%]">
           <p className="py-8 text-lg lg:text-xl">
