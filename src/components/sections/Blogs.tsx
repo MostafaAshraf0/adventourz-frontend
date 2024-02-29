@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import BlogCard from "../BlogCard";
-import Divider from "../Divider";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import {

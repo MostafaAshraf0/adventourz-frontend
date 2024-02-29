@@ -1,5 +1,3 @@
-import { manInBoat2 } from "@/assets/images";
-import Divider from "@/components/Divider";
 import { useParams } from "react-router-dom";
 
 const BlogDetailPage = () => {
