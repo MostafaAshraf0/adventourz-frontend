@@ -31,7 +31,7 @@ const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
   };
   return (
     <>
-      <BlogHeader />
+      {!inHomepage && <BlogHeader />}
       <div id="blogs" className="h-full px-12 py-10 lg:px-32">
         <div
           className="mt-8
