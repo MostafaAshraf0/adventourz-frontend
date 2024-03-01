@@ -1,4 +1,4 @@
-import { pyramids } from "@/assets/images";
+import { aboutUs } from "@/assets/images";
 // import { useParams } from "react-router-dom";
 
 const TourDetailPage = () => {
@@ -6,7 +6,7 @@ const TourDetailPage = () => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <img
-        src={pyramids}
+        src={aboutUs}
         alt=""
         className=" rounded-3xl object-contain shadow-2xl"
       />

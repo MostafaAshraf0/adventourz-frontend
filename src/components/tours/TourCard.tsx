@@ -1,4 +1,4 @@
-import { pyramids } from "@/assets/images";
+import { aboutUs } from "@/assets/images";
 import { Link } from "react-router-dom";
 
 interface TourCardProps {
@@ -13,7 +13,7 @@ const TourCard: React.FC<TourCardProps> = ({ tourId, scrollToOutlet }) => {
       onClick={scrollToOutlet}
       className="relative z-10 h-[250px] w-full cursor-pointer overflow-hidden rounded-xl bg-gray-900 shadow-lg transition duration-300 ease-in-out hover:shadow-2xl lg:h-[300px] lg:w-[500px]"
       style={{
-        backgroundImage: `url(${pyramids})`,
+        backgroundImage: `url(${aboutUs})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

@@ -1,14 +1,20 @@
 import { TypeAnimation } from "react-type-animation";
 import {
-  cairoCity,
-  cairoCity2,
-  camelPyramids,
-  mosque,
+  bgImage,
+  homePageImage1,
+  homePageImage2,
+  homePageImage3,
 } from "../../assets/images";
-import { FaArrowRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import {
+  FaArrowRight,
+  FaFacebook,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div
       id="home"
@@ -16,7 +22,7 @@ const Header = () => {
     >
       <div
         style={{
-          backgroundImage: `url(${camelPyramids})`,
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "absolute",
@@ -29,23 +35,21 @@ const Header = () => {
       ></div>
       <div className="m-auto flex w-full flex-col items-start justify-start  gap-6 py-8 lg:w-1/2 lg:px-32">
         <TypeAnimation
-          sequence={["EGYPT"]}
+          sequence={["Türkiye"]}
           wrapper="h1"
-          className="linear-gradient-text text-4xl font-black lg:text-8xl"
+          className="linear-gradient-text text-4xl font-black lg:py-4 lg:text-8xl"
           cursor={false}
         />
         <TypeAnimation
           sequence={[
             1500,
-            "The Land of Pharaohs",
+            "Adventourz For Trips",
             1500,
-            "The Land of Pyramids",
+            "Adventourz For Activities",
             1500,
-            "The Land of History",
+            "Adventourz For Adventures",
             1500,
-            "The Land of Beauty",
-            1500,
-            "The Land of Wonders",
+            "Adventourz For Excitement",
             1500,
           ]}
           wrapper="h2"
@@ -55,33 +59,53 @@ const Header = () => {
         />
 
         <p className="text-lg leading-tight text-white lg:text-2xl">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum odio
-          mollitia, tempore nihil quisquam accusamus eos consequatur
-          consequuntur! Molestiae voluptates quos repellendus iste placeat qui.
+          Experience endless excitement with Adventourz-your go-to for thrilling
+          journeys! Join our vibrant community and dive into unforgettable
+          adventures.
         </p>
-        <button className="flex flex-row items-center justify-center gap-1 rounded-3xl bg-primary px-5 py-2 text-white duration-300 hover:bg-secondary lg:text-2xl">
-          <Link to={"/tours"}>Explore</Link>
+        <button
+          className="flex flex-row items-center gap-1 rounded-xl bg-white px-5 py-2 font-bold text-black duration-300 hover:bg-secondary hover:text-white lg:text-2xl"
+          onClick={() => {
+            navigate("/tours");
+          }}
+        >
+          Explore
           <FaArrowRight />
         </button>
       </div>
       <div className="relative hidden items-center lg:flex lg:w-1/2">
         <img
-          src={cairoCity2}
+          src={homePageImage3}
           alt="placeholder"
-          className="relative ml-80 mt-80 h-[400px] w-[200px] rounded-xl border-4 object-cover hover:z-10 hover:scale-105"
+          className="relative ml-80 mt-80 h-[400px] w-[200px] cursor-pointer rounded-xl border-4 object-cover hover:z-10 hover:scale-105"
+          onClick={() => {
+            navigate("/tours");
+          }}
         />
 
         <img
-          src={cairoCity}
+          src={homePageImage2}
           alt="placeholder"
-          className="absolute ml-40 mt-40 h-[400px] w-[200px] rounded-xl border-4 object-cover hover:z-10 hover:scale-105"
+          className="absolute ml-40 mt-40 h-[400px] w-[200px] cursor-pointer rounded-xl border-4 object-cover hover:z-10 hover:scale-105"
+          onClick={() => {
+            navigate("/tours");
+          }}
         />
 
         <img
-          src={mosque}
+          src={homePageImage1}
           alt="placeholder"
-          className="absolute h-[400px] w-[200px] rounded-xl border-4 object-cover hover:scale-105"
+          className="absolute h-[400px] w-[200px] cursor-pointer rounded-xl border-4 object-cover hover:scale-105"
+          onClick={() => {
+            navigate("/tours");
+          }}
         />
+      </div>
+
+      <div className="absolute bottom-0 left-0 z-10 m-10 flex gap-4 lg:m-20 lg:flex-col ">
+        <Link to="https://www.instagram.com/adventourz_travel" target="_blank">
+          <FaInstagram className="h-6 w-6 cursor-pointer text-white duration-300 hover:text-secondary" />
+        </Link>
       </div>
     </div>
   );

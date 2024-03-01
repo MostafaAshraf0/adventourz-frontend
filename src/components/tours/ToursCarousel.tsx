@@ -1,4 +1,7 @@
-import { cairoCity, cairoCity2 } from "@/assets/images";
+import {
+  toursSliderImage1,
+  toursSliderImage2,
+} from "@/assets/images";
 import { useState } from "react";
 import { LuBadgeCheck } from "react-icons/lu";
 
@@ -13,7 +16,7 @@ const ToursCarousel = () => {
         onMouseLeave={() => setHovered(null)}
       >
         <img
-          src={cairoCity}
+          src={toursSliderImage1}
           alt="pyramids"
           className=" h-full w-full object-cover"
         />
@@ -62,7 +65,11 @@ const ToursCarousel = () => {
           <p>Completed Tours</p>
         </div>
 
-        <img src={cairoCity2} alt="" className="h-full w-full object-cover " />
+        <img
+          src={toursSliderImage2}
+          alt=""
+          className="h-full w-full object-cover "
+        />
         <div
           className={`absolute bottom-0 left-0 z-10 w-full flex-col bg-gradient-to-t from-accent/50 p-4 text-neutral transition-all duration-300  ${
             hovered === "left" ? "hidden" : "flex"
