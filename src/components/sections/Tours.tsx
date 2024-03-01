@@ -1,4 +1,5 @@
-import { manInBoat } from "@/assets/images";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { tourRightImage } from "@/assets/images";
 import Divider from "../Divider";
 import ToursCarousel from "../tours/ToursCarousel";
 import { Button } from "../ui/button";
@@ -7,7 +8,7 @@ import { PiArrowUpRight } from "react-icons/pi";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Tours = () => {
+const Tours = ({ isStatic }: { isStatic?: boolean }) => {
   const navigate = useNavigate();
   const { tourId } = useParams();
 
@@ -39,7 +40,7 @@ const Tours = () => {
                 variant={"primary"}
                 size={"lg"}
                 className="gap-1 px-9 text-xl"
-                onClick={() => navigate(`/tours/tourDetail/${tourId}`)}
+                // onClick={() => navigate(`/tours/tourDetail/${tourId}`)}
               >
                 Explore
                 <PiArrowUpRight />
@@ -59,7 +60,7 @@ const Tours = () => {
           {/* right */}
           <div className="relative hidden lg:flex lg:w-2/5">
             <img
-              src={manInBoat}
+              src={tourRightImage}
               alt=""
               className="h-full w-full object-cover"
             />
@@ -104,30 +105,33 @@ const Tours = () => {
         </div>
       </div>
 
-      <div className="flex flex-col bg-neutral px-6 py-6 text-start lg:px-32">
-        <p className="rounded-2xl bg-white p-2">
-          The pyramids are ancient monumental structures primarily found in
-          Egypt. They were built as tombs for pharaohs and queens, serving as a
-          final resting place and a symbol of their power and status.
-          Constructed during the Old and Middle Kingdom periods of ancient
-          Egypt, the pyramids are marvels of engineering, featuring precise
-          alignment, massive stone blocks, and intricate interior passages. The
-          most famous among them are the Great Pyramid of Giza, the Pyramid of
-          Khafre, and the Pyramid of Menkaure, all located on the Giza Plateau
-          near Cairo. These pyramids are characterized by their massive size,
-          geometric precision, and the mystery surrounding their construction
-          techniques. They continue to captivate the world with their grandeur
-          and historical significance, attracting millions of visitors annually.
-        </p>
+      {!isStatic && (
+        <div className="flex flex-col bg-neutral px-6 py-6 text-start lg:px-32">
+          <p className="rounded-2xl bg-white p-2">
+            The pyramids are ancient monumental structures primarily found in
+            Egypt. They were built as tombs for pharaohs and queens, serving as
+            a final resting place and a symbol of their power and status.
+            Constructed during the Old and Middle Kingdom periods of ancient
+            Egypt, the pyramids are marvels of engineering, featuring precise
+            alignment, massive stone blocks, and intricate interior passages.
+            The most famous among them are the Great Pyramid of Giza, the
+            Pyramid of Khafre, and the Pyramid of Menkaure, all located on the
+            Giza Plateau near Cairo. These pyramids are characterized by their
+            massive size, geometric precision, and the mystery surrounding their
+            construction techniques. They continue to captivate the world with
+            their grandeur and historical significance, attracting millions of
+            visitors annually.
+          </p>
 
-        {/* <Button
+          {/* <Button
           variant="primary"
           className="my-6 w-1/5 self-center"
           onClick={() => navigate(`/tours/tourDetail/${tourId}`)}
         >
           More
         </Button> */}
-      </div>
+        </div>
+      )}
     </>
   );
 };

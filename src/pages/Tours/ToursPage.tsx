@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useRef } from "react";
 import TourCard from "@/components/tours/TourCard";
 import { FaChevronUp } from "react-icons/fa";
@@ -12,6 +13,7 @@ import {
   PaginationNext,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import Tours from "@/components/sections/Tours";
 
 const ToursPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -53,7 +55,7 @@ const ToursPage: React.FC = () => {
 
   return (
     <div className="relative flex w-full flex-col items-center justify-center gap-10">
-      <div className="grid w-full gap-4 px-10 lg:w-auto lg:grid-cols-2">
+      {/* <div className="grid w-full gap-4 px-10 lg:w-auto lg:grid-cols-2">
         {Array.from({ length: totalTours })
           .slice((currentPage - 1) * toursPerPage, currentPage * toursPerPage)
           .map((_, i) => (
@@ -87,7 +89,8 @@ const ToursPage: React.FC = () => {
             <PaginationNext href="#" />
           </PaginationItem>
         </PaginationContent>
-      </Pagination>
+      </Pagination> */}
+      <Tours isStatic={true} />
       <div ref={outletRef} className="flex flex-col">
         <Outlet />
       </div>

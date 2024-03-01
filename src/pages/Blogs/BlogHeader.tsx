@@ -1,10 +1,10 @@
-import { manInBoat2 } from "@/assets/images";
+import { tourRightImage } from "@/assets/images";
 
 const BlogHeader = () => {
   return (
     <div className="w-full">
       <div className="relative flex w-full  items-center overflow-hidden lg:h-[500px] ">
-        <img src={manInBoat2} alt="" className="object-cover" />
+        <img src={tourRightImage} alt="" className="object-cover" />
 
         <div className="absolute h-full w-full bg-black/20" />
 
