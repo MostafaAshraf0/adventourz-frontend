@@ -24,7 +24,7 @@ const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
 
   useEffect(() => {
     setTotalPages(Math.ceil(totalBlogs / blogsPerPage));
-  }, []);
+  }, [totalBlogs]);
 
   const handlePageClick = (page: number) => {
     setCurrentPage(page);

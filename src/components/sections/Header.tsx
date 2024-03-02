@@ -5,12 +5,7 @@ import {
   homePageImage2,
   homePageImage3,
 } from "../../assets/images";
-import {
-  FaArrowRight,
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaArrowRight, FaInstagram } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
