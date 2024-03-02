@@ -1,32 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useRef } from "react";
-import TourCard from "@/components/tours/TourCard";
+// import TourCard from "@/components/tours/TourCard";
 import { FaChevronUp } from "react-icons/fa";
 import { Outlet } from "react-router-dom";
 // Importing Shadcn components
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
-} from "@/components/ui/pagination";
+// import {
+//   Pagination,
+//   PaginationContent,
+//   PaginationItem,
+//   PaginationLink,
+//   PaginationPrevious,
+//   PaginationNext,
+//   PaginationEllipsis,
+// } from "@/components/ui/pagination";
 import Tours from "@/components/sections/Tours";
 
 const ToursPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(0);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [totalPages, setTotalPages] = useState<number>(0);
   const outletRef = useRef<HTMLDivElement>(null);
 
-  const totalTours = 16;
-  const toursPerPage = 4;
+  // const totalTours = 16;
+  // const toursPerPage = 4;
 
   useEffect(() => {
     window.addEventListener("scroll", toggleVisibility);
-    setTotalPages(Math.ceil(totalTours / toursPerPage));
+    // setTotalPages(Math.ceil(totalTours / toursPerPage));
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
@@ -41,17 +41,17 @@ const ToursPage: React.FC = () => {
     });
   };
 
-  const scrollToOutlet = () => {
-    outletRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+  // const scrollToOutlet = () => {
+  //   outletRef.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
+  // };
 
-  const handlePageClick = (page: number) => {
-    setCurrentPage(page);
-    scrollToTop();
-  };
+  // const handlePageClick = (page: number) => {
+  //   setCurrentPage(page);
+  //   scrollToTop();
+  // };
 
   return (
     <div className="relative flex w-full flex-col items-center justify-center gap-10">

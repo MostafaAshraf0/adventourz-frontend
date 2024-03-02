@@ -6,10 +6,10 @@ import { Button } from "../ui/button";
 // import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { PiArrowUpRight } from "react-icons/pi";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Tours = ({ isStatic }: { isStatic?: boolean }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { tourId } = useParams();
 
   console.log(tourId);
