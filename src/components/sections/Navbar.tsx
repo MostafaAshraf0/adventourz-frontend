@@ -72,6 +72,8 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
         ))}
       </div>
 
+      <div className="" />
+
       <div className="lg:hidden">
         <button
           ref={toggleButtonRef}
