@@ -1,6 +1,5 @@
 import { logo } from "@/assets/images";
-import { Link as LinkRouter } from "react-router-dom";
-import { Link as LinkScroll } from "react-scroll";
+import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -71,47 +70,22 @@ const Footer = () => {
     <footer>
       <div
         className="
-        flex flex-col justify-around gap-10 px-10 py-16 lg:flex-row  lg:px-32
+        sticky bottom-0 flex flex-col justify-around gap-10 px-10  py-16 lg:flex-row lg:px-32
       "
       >
         <img
           src={logo}
           alt="adventourz logo"
           className="hidden h-[250px] w-[250px] object-cover p-4 lg:flex"
+          loading="eager"
         />
         <div className="flex flex-col lg:items-start lg:justify-start">
           <h1 className="text-3xl font-bold">Company</h1>
-          <LinkScroll
-            to="about"
-            spy={true}
-            smooth={true}
-            offset={0}
-            duration={500}
-          >
-            About
-          </LinkScroll>
-          <LinkScroll
-            to="tours"
-            spy={true}
-            smooth={true}
-            offset={0}
-            duration={500}
-          >
-            Tours
-          </LinkScroll>
-          <LinkScroll
-            to="blogs"
-            spy={true}
-            smooth={true}
-            offset={0}
-            duration={500}
-          >
-            Blogs
-          </LinkScroll>
-          <LinkRouter to="/terms-and-conditions">
-            Terms and Conditions
-          </LinkRouter>
-          <LinkRouter to="/privacy-policy">Privacy Policy</LinkRouter>
+          <Link to="/about-us">About</Link>
+          <Link to="/tours">Tours</Link>
+          <Link to="/blogs">Blogs</Link>
+          <Link to="/terms-and-conditions">Terms and Conditions</Link>
+          <Link to="/privacy-policy">Privacy Policy</Link>
         </div>
         <div>
           <EmailSubscriptionForm />

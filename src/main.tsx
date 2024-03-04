@@ -5,12 +5,14 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ToursPage from "./pages/Tours/ToursPage.tsx";
 import BlogsPage from "./pages/Blogs/BlogsPage.tsx";
-import TourDetailPage from "./pages/Tours/TourDetailPage.tsx";
 import BlogDetailPage from "./pages/Blogs/BlogDetailPage.tsx";
 import Tours from "./components/sections/Tours.tsx";
 import About from "./components/sections/About.tsx";
 import Home from "./pages/Home/Home.tsx";
 import OtherPages from "./OtherPages.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import TermsAndConditions from "./pages/TermsAndConditions.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 const router = createBrowserRouter([
   {
@@ -43,10 +45,6 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/tours/tourDetail/:id",
-        element: <TourDetailPage />,
-      },
-      {
         path: "/blogs",
         element: <BlogsPage />,
       },
@@ -55,16 +53,16 @@ const router = createBrowserRouter([
         element: <BlogDetailPage />,
       },
       {
-        path: "/privacypolicy",
-        element: <div>Privacy Policy Page</div>,
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
       {
-        path: "/terms",
-        element: <div>Terms Page</div>,
+        path: "/terms-and-conditions",
+        element: <TermsAndConditions />,
       },
       {
         path: "/:catchAll",
-        element: <div>Not Found</div>,
+        element: <NotFound />,
       },
     ],
   },

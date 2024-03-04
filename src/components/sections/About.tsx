@@ -14,7 +14,12 @@ const About = () => {
       </div>
       <div className="mt-8 flex w-full flex-col items-center justify-center gap-5 lg:mt-[60px] lg:flex-row ">
         <div className=" overflow-x-hidden rounded-3xl lg:h-[500px] lg:w-[50%] lg:rounded-[50px]">
-          <img src={aboutUs} alt="" className="h-full object-cover " />
+          <img
+            src={aboutUs}
+            alt="about us"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         </div>
         <div className="m-auto text-center lg:w-[50%]">
           <p className="py-8 text-lg lg:text-xl">

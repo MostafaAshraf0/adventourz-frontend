@@ -15,19 +15,13 @@ const Header = () => {
       id="home"
       className=" relative flex h-full  overflow-hidden rounded-b-[50px] bg-black/30 px-10 py-24 lg:p-10"
     >
-      <div
-        style={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          position: "absolute",
-          height: "100%",
-          width: "100%",
-          zIndex: -1,
-          top: 0,
-          left: 0,
-        }}
-      ></div>
+      <img
+        src={bgImage}
+        alt=""
+        className="
+        absolute left-0 top-0 -z-[1] h-full w-full bg-cover bg-center object-cover 
+      "
+      />
       <div className="m-auto flex w-full flex-col items-start justify-start  gap-6 py-8 lg:w-1/2 lg:px-32">
         <TypeAnimation
           sequence={["Türkiye"]}
@@ -71,6 +65,7 @@ const Header = () => {
       <div className="relative hidden items-center lg:flex lg:w-1/2">
         <img
           src={homePageImage3}
+          loading="eager"
           alt="placeholder"
           className="relative ml-80 mt-80 h-[400px] w-[200px] cursor-pointer rounded-xl border-4 object-cover hover:z-10 hover:scale-105"
           onClick={() => {
@@ -80,6 +75,7 @@ const Header = () => {
 
         <img
           src={homePageImage2}
+          loading="eager"
           alt="placeholder"
           className="absolute ml-40 mt-40 h-[400px] w-[200px] cursor-pointer rounded-xl border-4 object-cover hover:z-10 hover:scale-105"
           onClick={() => {
@@ -89,6 +85,7 @@ const Header = () => {
 
         <img
           src={homePageImage1}
+          loading="eager"
           alt="placeholder"
           className="absolute h-[400px] w-[200px] cursor-pointer rounded-xl border-4 object-cover hover:scale-105"
           onClick={() => {
@@ -99,7 +96,7 @@ const Header = () => {
 
       <div className="absolute bottom-0 left-0 z-10 m-10 flex gap-4 lg:m-20 lg:flex-col ">
         <Link to="https://www.instagram.com/adventourz_travel" target="_blank">
-          <FaInstagram className="h-6 w-6 cursor-pointer text-white duration-300 hover:text-secondary" />
+          <FaInstagram className="h-10 w-10 cursor-pointer text-white duration-300 hover:text-secondary" />
         </Link>
       </div>
     </div>

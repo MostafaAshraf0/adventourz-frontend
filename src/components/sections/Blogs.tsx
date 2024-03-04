@@ -52,34 +52,7 @@ const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
             ))}
         </div>
 
-        <Pagination className="mt-12">
-          <PaginationContent>
-            <PaginationItem
-              onClick={() =>
-                currentPage > 1 && handlePageClick(currentPage - 1)
-              }
-            >
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <PaginationItem key={i} onClick={() => handlePageClick(i + 1)}>
-                <PaginationLink href="#" isActive={i + 1 === currentPage}>
-                  {i + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            {totalPages > 5 && <PaginationEllipsis />}
-            <PaginationItem
-              onClick={() =>
-                currentPage < totalPages && handlePageClick(currentPage + 1)
-              }
-            >
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-
-        {inHomepage && (
+        {inHomepage ? (
           <div className="flex w-full items-center justify-center">
             <Button
               className="mt-10"
@@ -90,6 +63,33 @@ const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
               Read More
             </Button>
           </div>
+        ) : (
+          <Pagination className="mt-12">
+            <PaginationContent>
+              <PaginationItem
+                onClick={() =>
+                  currentPage > 1 && handlePageClick(currentPage - 1)
+                }
+              >
+                <PaginationPrevious href="#" />
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <PaginationItem key={i} onClick={() => handlePageClick(i + 1)}>
+                  <PaginationLink href="#" isActive={i + 1 === currentPage}>
+                    {i + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              {totalPages > 5 && <PaginationEllipsis />}
+              <PaginationItem
+                onClick={() =>
+                  currentPage < totalPages && handlePageClick(currentPage + 1)
+                }
+              >
+                <PaginationNext href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         )}
       </div>
     </>
