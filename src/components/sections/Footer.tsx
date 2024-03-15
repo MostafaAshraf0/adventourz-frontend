@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { FaInstagram } from "react-icons/fa";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -35,7 +36,7 @@ function EmailSubscriptionForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-row items-center justify-center gap-1 lg:w-auto"
+        className="flex w-full flex-row items-center gap-4"
       >
         <FormField
           control={form.control}
@@ -46,7 +47,7 @@ function EmailSubscriptionForm() {
               <FormControl>
                 <Input
                   placeholder="Your Email"
-                  className="rounded-xl py-6"
+                  className="rounded-xl py-3"
                   {...field}
                 />
               </FormControl>
@@ -57,7 +58,7 @@ function EmailSubscriptionForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="rounded-xl px-8 py-6">
+        <Button type="submit" className="rounded-xl px-8 py-3">
           Submit
         </Button>
       </form>
@@ -66,30 +67,66 @@ function EmailSubscriptionForm() {
 }
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <footer>
-      <div
-        className="
-        sticky bottom-0 flex flex-col justify-around gap-10 px-10  py-16 lg:flex-row lg:px-32
-      "
-      >
-        <img
-          src={logo}
-          alt="adventourz logo"
-          className="hidden h-[250px] w-[250px] object-cover p-4 lg:flex"
-          loading="eager"
-        />
-        <div className="flex flex-col lg:items-start lg:justify-start">
-          <h1 className="text-3xl font-bold">Company</h1>
-          <Link to="/about-us">About</Link>
-          <Link to="/tours">Tours</Link>
-          <Link to="/blogs">Blogs</Link>
-          <Link to="/terms-and-conditions">Terms and Conditions</Link>
-          <Link to="/privacy-policy">Privacy Policy</Link>
+      <section className="container flex w-full flex-col gap-8 py-16 lg:flex-row  lg:justify-between lg:px-32 ">
+        <div className="flex justify-center lg:flex-shrink-0 lg:justify-start">
+          <img
+            src={logo}
+            alt="Adventourz logo"
+            className="hidden h-[100px] w-auto object-contain lg:block lg:h-auto lg:max-h-[200px]"
+            loading="eager"
+          />
         </div>
-        <div>
+        <nav className="flex flex-col  items-start gap-2">
+          <h1 className="text-xl font-bold">Company</h1>
+          <Link className="text-lg hover:text-primary" to="/about-us">
+            About
+          </Link>
+          <Link className="text-lg hover:text-primary" to="/tours">
+            Tours
+          </Link>
+          <Link className="text-lg hover:text-primary" to="/blogs">
+            Blogs
+          </Link>
+          <Link
+            className="text-lg hover:text-primary"
+            to="/terms-and-conditions"
+          >
+            Terms and Conditions
+          </Link>
+          <Link className="text-lg hover:text-primary" to="/privacy-policy">
+            Privacy Policy
+          </Link>
+        </nav>
+        <section className="flex flex-col justify-between gap-2">
+          <div className="flex flex-col gap-1">
+            <p className="text-xl font-bold">Follow us</p>
+            <Link
+              to="https://www.instagram.com/adventourz_travel"
+              target="_blank"
+            >
+              <FaInstagram className="h-6 w-6 cursor-pointer text-black duration-300 hover:text-secondary" />
+            </Link>
+          </div>
           <EmailSubscriptionForm />
-        </div>
+        </section>
+      </section>
+      <div className="flex w-full flex-col items-center justify-center  border-t border-gray-200  py-4 text-center text-black">
+        <p>&copy; {year} Adventourz. All rights reserved.</p>
+        <p>
+          Website by{" "}
+          <a
+            href="https://techiden.com"
+            target="_blank"
+            rel="noreferrer"
+            className="bg-gradient-to-t from-[#FA855B] to-[#FA6F9C] bg-clip-text font-bold text-transparent"
+          >
+            Techiden
+          </a>
+          .
+        </p>
       </div>
     </footer>
   );
