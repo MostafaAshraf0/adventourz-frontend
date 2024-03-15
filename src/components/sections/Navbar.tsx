@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
 
   return (
     <nav
-      className={`z-50 w-full px-10 py-4  lg:px-32 ${isHomePage ? "absolute top-0" : "sticky bg-neutral shadow-lg"} flex items-center justify-between transition-all duration-300 ease-in-out`}
+      className={`z-50 w-full px-10 py-4 lg:px-32 ${isHomePage ? "absolute top-0" : "sticky bg-neutral shadow-lg"} flex items-center justify-between transition-all duration-300 ease-in-out`}
     >
       <Link
         to="/"
@@ -100,7 +100,7 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
       </div>
       <div
         ref={menuRef}
-        className={`fixed right-0 top-16 mt-2 flex w-48 flex-col items-center p-5 text-center shadow-md transition-all duration-300 ease-linear ${
+        className={`fixed right-0 top-16 mt-2 flex w-48 flex-col items-center gap-4 p-5 text-center shadow-md transition-all duration-300 ease-linear ${
           isMenuOpen ? "block" : "hidden"
         } ${isHomePage ? "rounded-lg bg-white" : "bg-neutral"} lg:static lg:m-0 lg:w-auto lg:flex-row lg:bg-transparent lg:p-0 lg:shadow-none`}
       >
@@ -116,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
         ))}
       </div>
 
-      <div className="" />
+      <div className="hidden lg:block"></div>
     </nav>
   );
 };
