@@ -18,12 +18,9 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const location = useLocation();
   const menuRef = useRef<HTMLDivElement | null>(null);
-  const toggleButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const [logo, setLogo] = useState<string>("");
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -40,6 +37,14 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isHomePage) {
+      setLogo("/images/logo-white.png");
+    } else {
+      setLogo("/images/logo-primary.png");
+    }
+  }, [isHomePage]);
+
   const isActive = (path: string): boolean => {
     if (path === "/") {
       return location.pathname === path;
@@ -53,12 +58,17 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
     >
       <Link
         to="/"
-        className={`cursor-pointer text-xl font-bold transition-colors duration-300 ease-in-out sm:text-3xl lg:text-4xl ${isHomePage ? "text-white" : "text-primary"}`}
+        className={`cursor-pointer transition-all duration-300 ease-in-out  `}
       >
-        ADVENTOURZ
+        <img
+          src={logo}
+          alt="Logo"
+          className="max-w-48 object-cover object-center lg:h-6 lg:max-w-lg"
+        />
+        {/* ADVENTOURZ */}
       </Link>
 
-      <div className="hidden gap-4 lg:flex">
+      <div className="hidden gap-12 lg:flex">
         {navLinks.map((link: NavLink, index: number) => (
           <Link
             key={index}
@@ -76,11 +86,15 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
 
       <div className="lg:hidden">
         <button
-          ref={toggleButtonRef}
-          onClick={toggleMenu}
+          onClick={
+            () => setIsMenuOpen(!isMenuOpen) // Step 1: Type the event parameter
+          }
           aria-label="Toggle menu"
+          type="button"
+          aria-controls="mobile-menu"
+          aria-expanded={isMenuOpen ? "true" : "false"}
         >
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`h-8 w-8 
             ${isHomePage ? "text-white" : "text-primary"}
@@ -95,7 +109,43 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
               strokeWidth={2}
               d="M4 6h16M4 12h16m-7 6h7"
             />
-          </svg>
+          </svg> */}
+
+          {isMenuOpen ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`h-8 w-8 
+                ${isHomePage ? "text-white" : "text-primary"}
+                lg:text-primary`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`h-8 w-8 
+                ${isHomePage ? "text-white" : "text-primary"}
+                lg:text-primary`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          )}
         </button>
       </div>
       <div

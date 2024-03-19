@@ -4,15 +4,16 @@ import Divider from "../Divider";
 import ToursCarousel from "../tours/ToursCarousel";
 import { Button } from "../ui/button";
 // import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
-import { PiArrowUpRight } from "react-icons/pi";
-import { useParams } from "react-router-dom";
+import { PiArrowDownBold } from "react-icons/pi";
+// import { useParams } from "react-router-dom";
+import { useRef } from "react";
 // import { useNavigate } from "react-router-dom";
 
 const Tours = ({ isStatic }: { isStatic?: boolean }) => {
   // const navigate = useNavigate();
-  const { tourId } = useParams();
+  // const { tourId } = useParams();
 
-  console.log(tourId);
+  const descriptionRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -41,9 +42,12 @@ const Tours = ({ isStatic }: { isStatic?: boolean }) => {
                 size={"lg"}
                 className="gap-1 px-9 text-xl"
                 // onClick={() => navigate(`/tours/tourDetail/${tourId}`)}
+                onClick={() =>
+                  descriptionRef.current?.scrollIntoView({ behavior: "smooth" })
+                }
               >
                 Explore
-                <PiArrowUpRight />
+                <PiArrowDownBold />
               </Button>
             </div>
 
@@ -106,7 +110,11 @@ const Tours = ({ isStatic }: { isStatic?: boolean }) => {
       </div>
 
       {!isStatic && (
-        <div className="flex flex-col bg-neutral px-6 py-6 text-start lg:px-32">
+        // description
+        <div
+          className="flex flex-col bg-neutral px-6 py-6 text-start lg:px-32"
+          ref={descriptionRef}
+        >
           <p className="rounded-2xl bg-white p-2">
             The pyramids are ancient monumental structures primarily found in
             Egypt. They were built as tombs for pharaohs and queens, serving as

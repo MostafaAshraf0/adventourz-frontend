@@ -90,7 +90,7 @@ const ToursPage: React.FC = () => {
           </PaginationItem>
         </PaginationContent>
       </Pagination> */}
-      <Tours isStatic={true} />
+      <Tours isStatic={false} />
       <div ref={outletRef} className="flex flex-col">
         <Outlet />
       </div>
