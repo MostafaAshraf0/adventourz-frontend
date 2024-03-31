@@ -13,7 +13,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ id, title, summary, date }) => {
   return (
     <Link
       to={`/blogs/${id}`}
-      className="h-full rounded-3xl bg-white p-4 hover:scale-105 hover:bg-white/80"
+      className="flex h-full flex-col justify-between rounded-3xl bg-white p-4 hover:scale-105 hover:bg-white/80"
     >
       <h1 className="mt-4 text-2xl ">{title}</h1>
 
