@@ -12,44 +12,122 @@ import {
   PaginationPrevious,
 } from "../ui/pagination";
 import BlogHeader from "@/pages/Blogs/BlogHeader";
+import axios from "axios";
+import BlogCardLoading from "../loading/BlogCardLoading";
+
+interface BlogProps {
+  ID: string;
+  Title: string;
+  Date: string;
+}
+
+interface BlogContentProps {
+  BlogID: string;
+  SectionTitle?: string;
+  Content: string;
+}
+
+interface BlogWithContentProps extends BlogProps {
+  Description: BlogContentProps[];
+}
+
+const CACHE_KEY = "blogData";
+const CACHE_EXPIRY_KEY = "blogDataExpiry";
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
   const navigate = useNavigate();
-
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const totalBlogs = inHomepage ? 3 : 16;
-  const blogsPerPage = 9;
+  const blogsPerPage = inHomepage ? 3 : 9;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [blogsData, setBlogsData] = useState<BlogWithContentProps[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTotalPages(Math.ceil(totalBlogs / blogsPerPage));
-  }, [totalBlogs]);
+    const url = import.meta.env.VITE_SHEETS_SCRIPT_URL;
+    const fetchBlogsData = async (): Promise<BlogWithContentProps[]> => {
+      const scriptUrl = url;
+      const blogsResponse = await axios.get(`${scriptUrl}?sheetName=Blogs`);
+      console.log("Blogs Response:", blogsResponse.data);
+
+      const contentsResponse = await axios.get(
+        `${scriptUrl}?sheetName=BlogContents`,
+      );
+
+      const blogsData: BlogProps[] = blogsResponse.data;
+      const contentsData: BlogContentProps[] = contentsResponse.data;
+      return blogsData.map((blog) => ({
+        ...blog,
+        Description: contentsData.filter(
+          (content) => content.BlogID === blog.ID,
+        ),
+      }));
+    };
+
+    const now = new Date();
+    const expiry = localStorage.getItem(CACHE_EXPIRY_KEY);
+    if (expiry && now.getTime() < Number(expiry)) {
+      const cachedData = localStorage.getItem(CACHE_KEY);
+      if (cachedData) {
+        setBlogsData(JSON.parse(cachedData));
+        setLoading(false);
+        return;
+      }
+    }
+
+    fetchBlogsData()
+      .then((data) => {
+        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+        localStorage.setItem(
+          CACHE_EXPIRY_KEY,
+          String(now.getTime() + CACHE_DURATION),
+        );
+        setBlogsData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch blogs data:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <>
+        {!inHomepage && <BlogHeader />}
+        <div id="blogs" className="h-full px-12 py-10 lg:px-32">
+          <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            {Array.from({ length: 4 }, (_, i) => (
+              <BlogCardLoading key={i} />
+            ))}
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  const totalPages = Math.ceil(blogsData.length / blogsPerPage);
+  const indexOfLastBlog = currentPage * blogsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  const currentBlogs = blogsData.slice(indexOfFirstBlog, indexOfLastBlog);
 
   const handlePageClick = (page: number) => {
     setCurrentPage(page);
   };
+
   return (
     <>
       {!inHomepage && <BlogHeader />}
       <div id="blogs" className="h-full px-12 py-10 lg:px-32">
-        <div
-          className="mt-8
-        grid grid-cols-1
-        gap-4
-        lg:grid-cols-2
-        xl:grid-cols-3
-        2xl:grid-cols-4
-        "
-        >
-          {Array.from({ length: totalBlogs })
-            .slice((currentPage - 1) * blogsPerPage, currentPage * blogsPerPage)
-            .map((_, i) => (
-              <BlogCard
-                key={i + (currentPage - 1) * blogsPerPage}
-                id={(i + (currentPage - 1) * blogsPerPage + 1).toString()}
-              />
-            ))}
+        <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          {currentBlogs.map((blog, index) => (
+            <BlogCard
+              key={index}
+              id={blog.ID}
+              title={blog.Title}
+              date={blog.Date}
+              summary={blog.Description[0]?.Content || "No summary available"}
+            />
+          ))}
         </div>
 
         {inHomepage ? (

@@ -20,7 +20,7 @@ const Tours = ({ isStatic }: { isStatic?: boolean }) => {
       <div id="tours" className="h-full overflow-hidden rounded-[0px]">
         <div className="flex h-full w-full bg-white">
           {/* left */}
-          <div className="w-full space-y-12 px-10 py-14 font-bold  lg:w-3/5 lg:pl-32 ">
+          <div className="w-full space-y-12 px-10 py-14 font-bold  lg:w-3/5 lg:pl-10 ">
             <h1 className="text-2xl text-primary lg:text-4xl">
               EXPLORE NEW WAYS TO
               <div className="flex flex-row items-center justify-start gap-4">

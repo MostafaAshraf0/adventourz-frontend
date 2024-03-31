@@ -1,28 +1,113 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { formatDate } from "@/lib/utils";
+import BlogDetailLoading from "@/components/loading/BlogDetailLoading";
+
+interface BlogContentProps {
+  SectionTitle: string;
+  Content: string;
+}
+
+interface BlogProps {
+  ID: string;
+  Title: string;
+  Date: string;
+  Description: BlogContentProps[];
+}
+
+const CACHE_KEY = "blogDetail";
+const CACHE_EXPIRY_KEY = "blogDetailExpiry";
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 const BlogDetailPage = () => {
-  const { id } = useParams();
-  return (
-    <div className="flex flex-col gap-10 px-10 lg:px-32">
-      <h3 className="text-2xl font-bold lg:text-4xl">
-        Blog {id}
-        <p className="text-sm font-normal text-gray-400">17 Feb, 2024</p>
-      </h3>
+  const { id } = useParams<{ id?: string }>();
+  const [blogDetails, setBlogDetails] = useState<BlogProps | null>(null);
+  const [loading, setLoading] = useState(true);
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-        dignissimos beatae assumenda eligendi ad itaque nulla cumque explicabo
-        nemo libero, aspernatur atque fugit odio amet ratione animi accusamus
-        nisi, reiciendis ut sapiente. Obcaecati beatae, eveniet debitis delectus
-        accusantium distinctio ipsa reprehenderit odio perspiciatis quae. Esse
-        vel deserunt iste libero atque praesentium, cupiditate ipsam quae
-        similique culpa exercitationem architecto velit facere ab suscipit
-        repellat laboriosam quia cumque perspiciatis est asperiores molestiae
-        repudiandae numquam voluptatum. Dolor architecto, nemo tempora odio quia
-        iste eveniet exercitationem voluptatibus ab non nobis nisi? Vel
-        laboriosam reiciendis facilis rem, amet excepturi cum beatae dolore
-        numquam omnis eaque.
-      </p>
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      if (!id) {
+        setBlogDetails(null);
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      const now = new Date();
+      const expiry = localStorage.getItem(CACHE_EXPIRY_KEY + id);
+      if (expiry && now.getTime() < Number(expiry)) {
+        const cachedData = localStorage.getItem(CACHE_KEY + id);
+        if (cachedData) {
+          setBlogDetails(JSON.parse(cachedData));
+          setLoading(false);
+          return;
+        }
+      }
+
+      try {
+        const url = import.meta.env.VITE_SHEETS_SCRIPT_URL; // Ensure you have the right URL
+        const response = await axios.get(`${url}?sheetName=Blogs&ID=${id}`);
+
+        console.log("API Response:", response.data); // Debugging line to check the API response
+
+        if (response.data && response.data.length > 0) {
+          const blogData = response.data[0];
+          localStorage.setItem(CACHE_KEY + id, JSON.stringify(blogData));
+          localStorage.setItem(
+            CACHE_EXPIRY_KEY + id,
+            String(now.getTime() + CACHE_DURATION),
+          );
+          setBlogDetails(blogData);
+        } else {
+          setBlogDetails(null); // Set to null if no matching blog is found
+        }
+      } catch (error) {
+        console.error("Error fetching blog details:", error);
+        setBlogDetails(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogData();
+  }, [id]);
+
+  if (loading) {
+    return <BlogDetailLoading />;
+  }
+
+  if (!blogDetails) {
+    return <h1>Blog not found</h1>;
+  }
+
+  return (
+    <div className="mx-auto my-10 max-w-4xl px-4 lg:px-0">
+      <article>
+        <header className="mb-10">
+          <h1 className="mb-3 text-3xl font-bold leading-tight lg:text-5xl">
+            {blogDetails.Title}
+          </h1>
+          <p className="text-lg text-gray-500">
+            {formatDate(blogDetails.Date)}
+          </p>
+        </header>
+
+        {blogDetails.Description && blogDetails.Description.length > 0 ? (
+          blogDetails.Description.map((section, index) => (
+            <section key={index} className="mb-8">
+              <h2 className="mb-2 text-2xl font-bold lg:text-3xl">
+                {section.SectionTitle}
+              </h2>
+              <p className="text-base leading-relaxed text-gray-700 lg:text-lg">
+                {section.Content}
+              </p>
+            </section>
+          ))
+        ) : (
+          <p>No content available.</p>
+        )}
+      </article>
     </div>
   );
 };

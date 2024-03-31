@@ -16,20 +16,36 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FaInstagram } from "react-icons/fa";
 
+interface FormValues {
+  Email: string;
+}
+
 const formSchema = z.object({
-  email: z.string().email(),
+  Email: z.string().email(),
 });
 
-function EmailSubscriptionForm() {
-  const form = useForm({
+const EmailSubscriptionForm: React.FC = () => {
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      Email: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit(values: FormValues) {
+    const endpoint =
+      "https://script.google.com/macros/s/AKfycbzG6_yiknWizpmlESCp8VxmdL14ahr94sprCQsH7E19HcCBPbmNMrDX17cPNKfdnpfD/exec";
+
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors", // This prevents CORS errors, but also means you can't read the response
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: values.Email }),
+    })
+      .then(() => console.log("Email submitted successfully"))
+      .catch((error) => console.error("Error:", error));
   }
 
   return (
@@ -40,7 +56,7 @@ function EmailSubscriptionForm() {
       >
         <FormField
           control={form.control}
-          name="email"
+          name="Email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Subscribe to our email newsletter</FormLabel>
@@ -64,7 +80,7 @@ function EmailSubscriptionForm() {
       </form>
     </Form>
   );
-}
+};
 
 const Footer = () => {
   const year = new Date().getFullYear();
