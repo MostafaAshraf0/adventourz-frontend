@@ -46,21 +46,14 @@ const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
     const url = import.meta.env.VITE_SHEETS_SCRIPT_URL;
     const fetchBlogsData = async (): Promise<BlogWithContentProps[]> => {
       const scriptUrl = url;
-      const blogsResponse = await axios.get(`${scriptUrl}?sheetName=Blogs`);
-      console.log("Blogs Response:", blogsResponse.data);
-
-      const contentsResponse = await axios.get(
-        `${scriptUrl}?sheetName=BlogContents`,
-      );
-
-      const blogsData: BlogProps[] = blogsResponse.data;
-      const contentsData: BlogContentProps[] = contentsResponse.data;
-      return blogsData.map((blog) => ({
-        ...blog,
-        Description: contentsData.filter(
-          (content) => content.BlogID === blog.ID,
-        ),
-      }));
+      try {
+        const response = await axios.get(`${scriptUrl}?sheetName=Blogs`);
+        console.log("Blogs Response:", response);
+        return response.data; // Assuming response.data is already in the correct format
+      } catch (error) {
+        console.error("Failed to fetch blogs data:", error);
+        return []; // Return empty array on error
+      }
     };
 
     const now = new Date();
@@ -74,20 +67,15 @@ const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
       }
     }
 
-    fetchBlogsData()
-      .then((data) => {
-        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-        localStorage.setItem(
-          CACHE_EXPIRY_KEY,
-          String(now.getTime() + CACHE_DURATION),
-        );
-        setBlogsData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch blogs data:", error);
-        setLoading(false);
-      });
+    fetchBlogsData().then((data) => {
+      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      localStorage.setItem(
+        CACHE_EXPIRY_KEY,
+        String(now.getTime() + CACHE_DURATION),
+      );
+      setBlogsData(data);
+      setLoading(false);
+    });
   }, []);
 
   if (loading) {
@@ -119,15 +107,22 @@ const Blogs = ({ inHomepage }: { inHomepage?: boolean }) => {
       {!inHomepage && <BlogHeader />}
       <div id="blogs" className="h-full px-12 py-10 lg:px-32">
         <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          {currentBlogs.map((blog, index) => (
-            <BlogCard
-              key={index}
-              id={blog.ID}
-              title={blog.Title}
-              date={blog.Date}
-              summary={blog.Description[0]?.Content || "No summary available"}
-            />
-          ))}
+          {currentBlogs.map((blog, index) => {
+            console.log(blog); // Check the blog object structure
+            return (
+              <BlogCard
+                key={index}
+                id={blog.ID}
+                title={blog.Title}
+                date={blog.Date}
+                summary={
+                  blog.Description.length > 0
+                    ? blog.Description[0].Content
+                    : "No summary available"
+                }
+              />
+            );
+          })}
         </div>
 
         {inHomepage ? (
